@@ -1,0 +1,38 @@
+pipeline:
+  name: starter
+  identifier: starter
+  projectIdentifier: venkatpadmanabhan
+  orgIdentifier: CI_Training
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.venkatgithub
+        repoName: gosample
+        build: <+input>
+  stages:
+    - stage:
+        name: build
+        identifier: build
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Build Go App
+                  identifier: Build_Go_App
+                  spec:
+                    shell: Sh
+                    command: |-
+                      echo "Welcome to Harness CI"
+                      go build
+                      go test
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
